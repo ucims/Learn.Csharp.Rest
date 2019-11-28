@@ -76,6 +76,7 @@
             this.buttonMaju.TabIndex = 2;
             this.buttonMaju.Text = "Maju";
             this.buttonMaju.UseVisualStyleBackColor = true;
+            this.buttonMaju.Click += new System.EventHandler(this.buttonMaju_Click);
             // 
             // Form1
             // 
