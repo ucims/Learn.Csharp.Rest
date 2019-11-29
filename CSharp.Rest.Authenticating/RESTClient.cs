@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Net;
 
-namespace CSharpRestExample
+namespace CSharp.Rest.Authenticating
 {
     public enum httpVerb
     {
@@ -15,27 +15,10 @@ namespace CSharpRestExample
         PUT,
         DELETE
     }
-
-    public enum AutheticationType
-    {
-        BASIC,
-        NTLM
-    }
-
-    public enum AutheticationTechnique
-    {
-        ROLLYOUOWN,
-        NETWORKCREDITENTIALCLASS
-    }
-
     class RESTClient
     {
         public string endPoint { get; set; }
         public httpVerb httpMethod { get; set; }
-        public AutheticationType authType { get; set; }
-        public AutheticationTechnique authTechnique { get; set; }
-        public string userName { get; set; }
-        public string userPassword { get; set; }
 
         public RESTClient()
         {
@@ -48,18 +31,18 @@ namespace CSharpRestExample
             string strResponseValue = string.Empty;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
             request.Method = httpMethod.ToString();
-           // HttpWebResponse response = null;
+            // HttpWebResponse response = null;
 
-            using(HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             {
-                if(response.StatusCode != HttpStatusCode.OK)
+                if (response.StatusCode != HttpStatusCode.OK)
                 {
                     throw new ApplicationException("Error code is  " + response.StatusCode.ToString());
                 }
 
                 using (Stream responseStream = response.GetResponseStream())
                 {
-                    if(responseStream != null)
+                    if (responseStream != null)
                     {
                         using (StreamReader reader = new StreamReader(responseStream))
                         {
@@ -99,6 +82,5 @@ namespace CSharpRestExample
             */
             return strResponseValue;
         }
-
-    }
+    } 
 }
